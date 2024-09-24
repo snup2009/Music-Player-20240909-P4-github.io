@@ -11,9 +11,19 @@ int numberOfSongs = 8; //Able to Autodetect based on Pathway
 AudioPlayer[] song = new AudioPlayer[numberOfSongs];
 int currentSong = numberOfSongs - numberOfSongs;  //beginning current song as ZERO
 //
+int appWidth, appHeight;
+float musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight;
+//
 void setup()
 {
   size(900, 800);
+  appWidth = width;
+  appHeight = height;
+  //Variables for any music button
+  musicButtonWidth = appWidth*1/2;
+  musicButtonHeight = appHeight*1/2;
+  musicButtonX = musicButtonWidth - musicButtonWidth*1/2;
+  musicButtonY = musicButtonHeight - musicButtonHeight*1/2;
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -31,39 +41,23 @@ void setup()
   String theSimplest = "The_Simplest";
   //
   //Add Reading into Array
-  String directory = "../../" + musicPathway;
-  println ( currentSong, directory );
+  String directory = "../../../" + musicPathway;
   String file = directory + groove + mp3FileName;
-  println (file);
   song[currentSong] = minim.loadFile( file );
   file = directory + startYourEngines + mp3FileName;
-  println (file);
   song[currentSong+=1] = minim.loadFile( file );
-  println( currentSong, song[currentSong] );
   file = directory + beatYourCompetition + mp3FileName;
-  println (file);
   song[currentSong+=1] = minim.loadFile( file );
-  println( currentSong, song[currentSong] );
   file = directory + cycles + mp3FileName;
-  println (file);
   song[currentSong+=1] = minim.loadFile( file );
-  println( currentSong, song[currentSong] );
   file = directory + eureka + mp3FileName;
-  println (file);
   song[currentSong+=1] = minim.loadFile( file );
-  println( currentSong, song[currentSong] );
   file = directory + ghostWalk + mp3FileName;
-  println (file);
   song[currentSong+=1] = minim.loadFile( file );
-  println( currentSong, song[currentSong] );
   file = directory + newsroom + mp3FileName;
-  println (file);
   song[currentSong+=1] = minim.loadFile( file );
-  println( currentSong, song[currentSong] );
   file = directory + theSimplest + mp3FileName;
-  println (file);
   song[currentSong+=1] = minim.loadFile( file );
-  println( currentSong, song[currentSong] );
   //
   currentSong = 0;
   //
@@ -75,6 +69,8 @@ void setup()
   //
   //DIVs
   //rect() based on variables; variables change with program (introduces parameters of a function and TABS)
+  //rect( X, Y, Width, Height );
+  rect( musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight );
 } //End setup
 //
 void draw() {
