@@ -12,35 +12,58 @@ AudioPlayer[] song = new AudioPlayer[numberOfSongs];
 int currentSong = numberOfSongs - numberOfSongs;  //beginning current song as ZERO
 //
 int appWidth, appHeight;
-float musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight;
+float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height;
+float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
 //
 void setup()
 {
-  size(300, 800);
+  size(1000, 800);
   appWidth = width;
   appHeight = height;
   //Variables for any music button
-  musicButtonWidth = appWidth*1/2;
-  musicButtonHeight = appHeight*1/2;
-  musicButtonX = musicButtonWidth - musicButtonWidth*1/2;
-  musicButtonY = musicButtonHeight - musicButtonHeight*1/2;
-  if ( musicButtonWidth >= musicButtonHeight ) { //error: square does not go in the middle
-    // musicButtonWidth needs to change
-    musicButtonWidth = musicButtonHeight;
-  } else {
-    // musicButtonHeight needs to change
-    musicButtonHeight = musicButtonWidth;
-  }
+  musicButtonDIV_Width = appWidth*1/2;
+  musicButtonDIV_Height = appHeight*1/2;
+  musicButtonDIV_X = musicButtonDIV_Width - musicButtonDIV_Width*1/2;
+  musicButtonDIV_Y = musicButtonDIV_Height- musicButtonDIV_Height*1/2;
   //Use if statement to change, introduce ternary operator
   //
   //Population (Variables)
-  float padding = 1.0/4.0;
-  float stopButtonSize = 1.0-(1.0/4.0);
-  stopWidth = musicButtonWidth*stopButtonSize; //stopButtonSize
-  stopHeight = musicButtonHeight*stopButtonSize; //stopButtonSize
-  stopX = musicButtonX+padding;
-  stopY = musicButtonY+padding;
+  //Work out a case Study: Landscape
+  musicButtonSquareWidth = musicButtonDIV_Width;
+  musicButtonSquareHeight = musicButtonDIV_Width;
+  float padding1 = musicButtonDIV_Width - musicButtonDIV_Height; //working out value needed, with formulae
+  float padding2 = padding1*1/2; ////working out value needed, with formulae
+  musicButtonSquareX = musicButtonDIV_X + padding2; //note: minus moves it the wrong way, difficult to see
+  musicButtonSquareY = musicButtonDIV_Y;
+  println( musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height ); 
+  println ( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
+  println ( padding1 );
+  //
+  //Work out a case Study: Portrait
+  /*
+  if ( musicButtonDIV_Width >= musicButtonDIV_Height ) { //error: square does not go in the middle
+   // musicButtonWidth needs to change
+   musicButtonSquareWidth = musicButtonDIV_Height;
+   musicButtonSquareHeight = musicButtonDIV_Height;
+   musicButtonSquareX = musicButtonDIV_X + ( ( musicButtonDIV_Width - musicButtonDIV_Height )*1/2 );
+   musicButtonSquareY = musicButtonDIV_Y;
+   } else {
+   // musicButtonHeight needs to change
+   musicButtonSquareWidth = musicButtonDIV_Width;
+   musicButtonSquareHeight = musicButtonDIV_Width;
+   musicButtonSquareX = musicButtonDIV_X;
+   musicButtonSquareY = musicButtonDIV_Y + musicButtonDIV_Width*1/2;
+   }
+   */
+  //float padding = 1.0/4.0;
+  //float stopButtonSize = 1.0-(1.0/4.0);
+  /*
+  stopWidth = musicButtonDIV_Width*stopButtonSize; //stopButtonSize
+   stopHeight = musicButtonDIV_Height*stopButtonSize; //stopButtonSize
+   stopX = musicButtonDIV_X+padding;
+   stopY = musicButtonDIV_Y+padding;
+   */
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -87,14 +110,14 @@ void setup()
   //DIVs
   //rect() based on variables; variables change with program (introduces parameters of a function and TABS)
   //rect( X, Y, Width, Height );
-  rect( musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight );
+  rect( musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height );
 } //End setup
 //
 void draw() {
-  background(200); // Gray Scale: 0-255
-  rect( musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight );
+  //background(200); // Gray Scale: 0-255
+  rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
   //fill();
-  rect( stopX, stopY, stopWidth, stopHeight );
+  //rect( stopX, stopY, stopWidth, stopHeight );
 } //End draw
 //
 void mousePressed() {
