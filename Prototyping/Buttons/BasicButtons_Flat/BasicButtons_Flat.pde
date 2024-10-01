@@ -18,7 +18,7 @@ float stopX, stopY, stopWidth, stopHeight;
 //
 void setup()
 {
-  size(400, 800);
+  size(1000, 800);
   appWidth = width;
   appHeight = height;
   //Variables for any music button
@@ -65,36 +65,22 @@ void setup()
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
   // Load Music
-  String musicPathway = "Music/";
+ String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
   String beatYourCompetition = "Beat_Your_Competition";
   String cycles = "Cycles";
   String eureka = "Eureka";
-  String ghostWalk = "Ghost_Walk";
-  String groove = "groove";
-  String newsroom = "Newsroom";
-  String startYourEngines = "Start_Your_Engines";
-  String theSimplest = "The_Simplest";
   //
   //Add Reading into Array
-  String directory = "../../../" + musicPathway;
-  String file = directory + groove + mp3FileName;
+ String directory = "../../../" + musicPathway;
+  String file = directory + cycles + mp3FileName;
   song[currentSong] = minim.loadFile( file );
-  file = directory + startYourEngines + mp3FileName;
-  song[currentSong+=1] = minim.loadFile( file );
   file = directory + beatYourCompetition + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
   file = directory + cycles + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
   file = directory + eureka + mp3FileName;
-  song[currentSong+=1] = minim.loadFile( file );
-  file = directory + ghostWalk + mp3FileName;
-  song[currentSong+=1] = minim.loadFile( file );
-  file = directory + newsroom + mp3FileName;
-  song[currentSong+=1] = minim.loadFile( file );
-  file = directory + theSimplest + mp3FileName;
-  song[currentSong+=1] = minim.loadFile( file );
   //
   currentSong = 0;
   //
