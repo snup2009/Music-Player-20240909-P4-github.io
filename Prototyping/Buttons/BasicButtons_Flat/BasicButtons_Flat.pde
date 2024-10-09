@@ -62,8 +62,8 @@ void setup()
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
-  // Load Music
- String musicPathway = "Music/";
+ // Load Music
+  String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
   String beatYourCompetition = "Beat_Your_Competition";
@@ -71,7 +71,7 @@ void setup()
   String eureka = "Eureka";
   //
   //Add Reading into Array
- String directory = "../../../" + musicPathway;
+  String directory = "../../../" + musicPathway;
   String file = directory + cycles + mp3FileName;
   song[currentSong] = minim.loadFile( file );
   file = directory + beatYourCompetition + mp3FileName;
