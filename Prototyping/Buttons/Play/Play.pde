@@ -16,6 +16,7 @@ int appWidth, appHeight;
 float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height;
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
+float playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y;
 //
 color purple=#DB05FF, yellow=#E9FF00, blue=#037EFF, white=#FFFFFF, black=#000000, green=#00FF00;
 color dayForeground=purple, dayHoverover=blue, dayBackground=white;
@@ -24,7 +25,7 @@ color nightForeground=green, nightHoverover=yellow, nightBackground=black;
 color appColorForeground, appColorHoverover, appColorBackground;
 color stopButtonHoverOver;
 //
-Boolean colorDarkMode=false; //Preference: true or false //Future: Build Button for Dark Mode Preference
+Boolean colorDarkMode=true; //Preference: true or false //Future: Build Button for Dark Mode Preference
 //
 void setup()
 {
@@ -62,6 +63,13 @@ void setup()
   stopHeight = musicButtonSquareHeight*1/2;
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/4;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
+  playButton1X = musicButtonSquareX + musicButtonSquareWidth*1/4;
+  playButton1Y  = musicButtonSquareY + musicButtonSquareHeight*1/4;
+  playButton2X = musicButtonSquareX + musicButtonSquareWidth*3/4;
+  playButton2Y = musicButtonSquareY + musicButtonSquareHeight*1/2;
+  playButton3X = musicButtonSquareX + musicButtonSquareWidth*1/4;
+  playButton3Y = musicButtonSquareY + musicButtonSquareHeight*3/4;
+  //playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -72,21 +80,34 @@ void setup()
   String beatYourCompetition = "Beat_Your_Competition";
   String cycles = "Cycles";
   String eureka = "Eureka";
+  String ghostWalk = "Ghost_Walk";
+  String groove = "groove";
+  String newsroom = "Newsroom";
+  String startYourEngines = "Start_Your_Engines";
+  String theSimplest = "The_Simplest";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
-  String file = directory + mp3FileName;
+  String file = directory + groove + mp3FileName;
   song[currentSong] = minim.loadFile( file );
+  file = directory + startYourEngines + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
   file = directory + beatYourCompetition + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
   file = directory + cycles + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
   file = directory + eureka + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
+  file = directory + ghostWalk + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
+  file = directory + newsroom + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
+  file = directory + theSimplest + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
   //
   currentSong = 0;
   //
-  song[currentSong].play();
+  //song[currentSong].play();
   //Use play(timeStart) & loop(numberOfLoops)
   //Purpose is 2D Shapes
   //Introduce keyPressed as keyboard shortcuts
@@ -146,7 +167,7 @@ void draw() {
   fill(stopButtonHoverOver);
   noStroke(); //Colour
   //
-  rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
+  triangle(playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y);
   fill(255); //noFill(); //White in Gray Scale
   stroke(1); //Reset default
   //
@@ -163,11 +184,7 @@ void mousePressed() {
    Must have Hoverover to ensure mouse will activate, visual confirmation of algorithm
    */
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
-    if ( song[currentSong].isPlaying() ) {
-      song[currentSong].pause(); //single tap
-    } else {
-      song[currentSong].rewind(); //double tap
-    }
+    song[currentSong].loop(0); //Simple Play, double tap possible
   }
   //
 } //End mousePressed

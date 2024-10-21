@@ -24,7 +24,7 @@ color nightForeground=green, nightHoverover=yellow, nightBackground=black;
 color appColorForeground, appColorHoverover, appColorBackground;
 color stopButtonHoverOver;
 //
-Boolean colorDarkMode=false; //Preference: true or false //Future: Build Button for Dark Mode Preference
+Boolean colorDarkMode=true; //Preference: true or false //Future: Build Button for Dark Mode Preference
 //
 void setup()
 {
@@ -72,16 +72,29 @@ void setup()
   String beatYourCompetition = "Beat_Your_Competition";
   String cycles = "Cycles";
   String eureka = "Eureka";
+  String ghostWalk = "Ghost_Walk";
+  String groove = "groove";
+  String newsroom = "Newsroom";
+  String startYourEngines = "Start_Your_Engines";
+  String theSimplest = "The_Simplest";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
-  String file = directory + mp3FileName;
+  String file = directory + groove + mp3FileName;
   song[currentSong] = minim.loadFile( file );
+  file = directory + startYourEngines + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
   file = directory + beatYourCompetition + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
   file = directory + cycles + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
   file = directory + eureka + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
+  file = directory + ghostWalk + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
+  file = directory + newsroom + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
+  file = directory + theSimplest + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
   //
   currentSong = 0;

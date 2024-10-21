@@ -16,9 +16,17 @@ int appWidth, appHeight;
 float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height;
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
+float quitThicknessLine, quitButtonX1, quitButtonY1, quitButtonX2, quitButtonY2;
+float quitButtonX3, quitButtonY3, quitButtonX4, quitButtonY4;
 //
-color purple=#DB05FF, yellow=#E9FF00;
-color stopButtonHoverOver;
+color purple=#DB05FF, yellow=#E9FF00, blue=#037EFF, white=#FFFFFF, black=#000000, green=#00FF00;
+color dayForeground=purple, dayHoverover=blue, dayBackground=white;
+color darkForeground=purple, darkHoverover=yellow, darkBackground=black;
+color nightForeground=green, nightHoverover=yellow, nightBackground=black;
+color appColorForeground, appColorHoverover, appColorBackground;
+color stopButtonHoverOver, quitButtonLineColour;
+//
+Boolean colorDarkMode=true; //Preference: true or false //Future: Build Button for Dark Mode Preference
 //
 void setup()
 {
@@ -56,26 +64,49 @@ void setup()
   stopHeight = musicButtonSquareHeight*1/2;
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/4;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
+  quitThicknessLine = ( musicButtonSquareWidth / musicButtonSquareWidth ) + musicButtonSquareWidth*1/4*1/2;
+  quitButtonX1 = stopX;
+  quitButtonY1 = stopY;
+  quitButtonX2 = stopX+stopWidth;
+  quitButtonY2 = stopY+stopHeight;
+  quitButtonX3 = quitButtonX2;
+  quitButtonY3 = quitButtonY1; 
+  quitButtonX4 = quitButtonX1;
+  quitButtonY4 = quitButtonY2;
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
- // Load Music
+  // Load Music
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
   String beatYourCompetition = "Beat_Your_Competition";
   String cycles = "Cycles";
   String eureka = "Eureka";
+  String ghostWalk = "Ghost_Walk";
+  String groove = "groove";
+  String newsroom = "Newsroom";
+  String startYourEngines = "Start_Your_Engines";
+  String theSimplest = "The_Simplest";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
-  String file = directory + cycles + mp3FileName;
+  String file = directory + groove + mp3FileName;
   song[currentSong] = minim.loadFile( file );
+  file = directory + startYourEngines + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
   file = directory + beatYourCompetition + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
   file = directory + cycles + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
   file = directory + eureka + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
+  file = directory + ghostWalk + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
+  file = directory + newsroom + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
+  file = directory + theSimplest + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
   //
   currentSong = 0;
   //
@@ -89,17 +120,40 @@ void setup()
   //rect() based on variables; variables change with program (introduces parameters of a function and TABS)
   //rect( X, Y, Width, Height );
   //rect( musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height );
+  //
+  println(colorDarkMode);
+  if ( colorDarkMode==false && ( hour()<=7 || hour()>=17 ) ) { //Testing: change 5PM to earlier time, shortcut colorNightMode==true
+    //Night
+    appColorForeground = nightForeground;
+    appColorHoverover = nightHoverover;
+    appColorBackground = nightBackground;
+    println("here1");
+  } else if ( colorDarkMode==false && ( hour()>7 || hour()<17 ) ) {
+    //Day
+    appColorForeground = dayForeground;
+    appColorHoverover = dayHoverover;
+    appColorBackground = dayBackground;
+    println("here2");
+  } else {
+    //Dark Mode 
+    appColorForeground = darkForeground;
+    appColorHoverover = darkHoverover;
+    appColorBackground = darkBackground;
+    println("here3");
+  }
+  //
 } //End setup
 //
 void draw() {
-  background(0); //Gray Scale: 0-255, full BLUE Colour
+  background(appColorBackground); //Gray Scale: 0-255, full BLUE Colour
   //
+  //fill() is default
   rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
   //
   /* Note: 3 types of colour, in pairs for hoverover
-   - Day: TBA-foreground | TBA-background (Hoverover)
-   - Dark: TBA-foreground | TBA-background (Hoverover)
-   - Night, no blue: TBA-foreground | TBA-background (Hoverover)
+   - Day, Foreground: #DB05FF | Hoverover: #037EFF | Background: #FFFFFF
+   - Dark, Foreground: #DB05FF | Hoverover: #E9FF00 | Background: #000000
+   - Night, no blue, Foreground: #00FF00 | Hoverover: #E9FF00 | Background: #000000
    - Dark Mode is for all the time, how bright the screen is and eye strain
    - API: when does sunrise, when does sunset, is the system time within those hours
    - Night mode is for all the time or just
@@ -109,16 +163,29 @@ void draw() {
   //
   //Hoverover IF - Used in all other buttons too
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
-    stopButtonHoverOver = yellow; // Single Line IFs for Day, Dark, and Night Booleans
+    stopButtonHoverOver = appColorHoverover; // See SetUp: Single Line IFs for Day, Dark, and Night Booleans
+    quitButtonLineColour = appColorHoverover;
   } else {
-    stopButtonHoverOver = purple; // Single Line IFs for Day, Dark, and Night Booleans
+    stopButtonHoverOver = appColorForeground; // See SetUp: Single Line IFs for Day, Dark, and Night Booleans
+    quitButtonLineColour = appColorForeground;
   }
   fill(stopButtonHoverOver);
-  noStroke(); //Colour
+  //stroke(); //Colour
   //
-  rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
-  fill(255); //noFill();
+  fill(stopButtonHoverOver);
+  noStroke(); //Colour
+  //rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
+  fill(255); //noFill(); //White in Gray Scale
   stroke(1); //Reset default
+  //
+  //
+  stroke(quitButtonLineColour);
+  strokeWeight(quitThicknessLine);
+  line( quitButtonX1, quitButtonY1, quitButtonX2, quitButtonY2 );
+  line( quitButtonX3, quitButtonY3, quitButtonX4, quitButtonY4 );
+  fill(255); //noFill(); //White in Gray Scale
+  stroke(1); //Reset default
+  //noStroke(1); //Reset default
   //
   //Music Buttons Interactions: cascading IFs can become AND Statements
   //Note: keypressed must have click on screen
