@@ -7,7 +7,7 @@ import ddf.minim.ugens.*;
 //
 //Global Variables
 Minim minim;
-int numberOfSongs = 8; //Able to Autodetect based on Pathway
+int numberOfSongs = 3; //Able to Autodetect based on Pathway
 AudioPlayer[] song = new AudioPlayer[numberOfSongs];
 int currentSong = numberOfSongs - numberOfSongs;  //beginning current song as ZERO
 //
@@ -17,12 +17,12 @@ float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_H
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
 //
-color purple=#DB05FF, yellow=#E9FF00, blue=#037EFF, white=#FFFFFF, black=#000000, green=#00FF00;
-color dayForeground=purple, dayHoverover=blue, dayBackground=white;
-color darkForeground=purple, darkHoverover=yellow, darkBackground=black;
-color nightForeground=green, nightHoverover=yellow, nightBackground=black;
-color appColorForeground, appColorHoverover, appColorBackground;
-color stopButtonHoverOver;
+color purple=#A020F0, yellow=#FFEA00, blue=#00BFFF, white=#FAF0E6, black=#0C0C0C, green=#7FFF00;
+color dayForeground=blue, dayHoverover=green, dayBackground=#333333; // Darker background
+color darkForeground=yellow, darkHoverover=purple, darkBackground=black;
+color nightForeground=blue, nightHoverover=white, nightBackground=black;
+color appColorForeground=green, appColorHoverover=yellow, appColorBackground=purple;
+color stopButtonHoverOver=white;
 //
 Boolean colorDarkMode=false; //Preference: true or false //Future: Build Button for Dark Mode Preference
 //
@@ -75,13 +75,15 @@ void setup()
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
-  String file = directory + mp3FileName;
-  song[currentSong] = minim.loadFile( file );
+  String file;
   file = directory + beatYourCompetition + mp3FileName;
-  song[currentSong+=1] = minim.loadFile( file );
+  println(currentSong, file);
+  song[currentSong] = minim.loadFile( file );
   file = directory + cycles + mp3FileName;
+  println(currentSong, file);
   song[currentSong+=1] = minim.loadFile( file );
   file = directory + eureka + mp3FileName;
+  println(currentSong, file);
   song[currentSong+=1] = minim.loadFile( file );
   //
   currentSong = 0;
@@ -111,7 +113,7 @@ void setup()
     appColorBackground = dayBackground;
     println("here2");
   } else {
-    //Dark Mode 
+    //Dark Mode
     appColorForeground = darkForeground;
     appColorHoverover = darkHoverover;
     appColorBackground = darkBackground;
