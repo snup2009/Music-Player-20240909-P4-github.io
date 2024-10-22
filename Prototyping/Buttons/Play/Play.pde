@@ -18,12 +18,12 @@ float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButto
 float stopX, stopY, stopWidth, stopHeight;
 float playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y;
 //
-color purple=#1DB954, yellow=#FFD700, blue=#1ED760, white=#FFFFFF, black=#191414, green=#1DB954; // Spotify green
-color dayForeground=white, dayHoverover=green, dayBackground=black; // Dark theme
-color darkForeground=green, darkHoverover=yellow, darkBackground=black;
-color nightForeground=white, nightHoverover=green, nightBackground=black;
-color appColorForeground=green, appColorHoverover=white, appColorBackground=black;
-color stopButtonHoverOver=white;
+color green=#34D058, black=#1A1A1A, gray=#B0B0B0, darkGray=#2C2C2C;
+color dayForeground=green, dayHoverover=gray, dayBackground=black;
+color darkForeground=gray, darkHoverover=green, darkBackground=black;
+color nightForeground=green, nightHoverover=gray, nightBackground=darkGray;
+color appColorForeground=green, appColorHoverover=gray, appColorBackground=black;
+color stopButtonHoverOver=gray;
 //
 Boolean colorDarkMode=true; //Preference: true or false //Future: Build Button for Dark Mode Preference
 //
@@ -73,7 +73,28 @@ void setup()
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
-  
+  // Load Music
+  String musicPathway = "Music/";
+  String mp3FileName = ".mp3";
+  //Alphebetical order, same as OS ordering files
+  String beatYourCompetition = "Beat_Your_Competition";
+  String cycles = "Cycles";
+  String eureka = "Eureka";
+  //
+  //Add Reading into Array
+  String directory = "../../../" + musicPathway;
+  String file;
+  file = directory + beatYourCompetition + mp3FileName;
+  println(currentSong, file);
+  song[currentSong] = minim.loadFile( file );
+  file = directory + cycles + mp3FileName;
+  println(currentSong, file);
+  song[currentSong+=1] = minim.loadFile( file );
+  file = directory + eureka + mp3FileName;
+  println(currentSong, file);
+  song[currentSong+=1] = minim.loadFile( file );
+  //
+  song[currentSong].play();
   //
   //song[currentSong].play();
   //Use play(timeStart) & loop(numberOfLoops)
