@@ -76,7 +76,7 @@ void setup()
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
-   // Load Music
+  // Load Music
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
