@@ -17,12 +17,12 @@ float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_H
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
 //
-color purple=#A020F0, yellow=#FFEA00, blue=#00BFFF, white=#FAF0E6, black=#0C0C0C, green=#7FFF00;
-color dayForeground=blue, dayHoverover=green, dayBackground=#333333; // Darker background
-color darkForeground=yellow, darkHoverover=purple, darkBackground=black;
-color nightForeground=blue, nightHoverover=white, nightBackground=black;
-color appColorForeground=green, appColorHoverover=yellow, appColorBackground=purple;
-color stopButtonHoverOver=white;
+color black=#1C1C1C, red=#FF5733, yellow=#FFC300, blue=#3498DB, green=#2ECC71;
+color dayForeground=green, dayHoverover=red, dayBackground=yellow;
+color darkForeground=black, darkHoverover=green, darkBackground=red;
+color nightForeground=yellow, nightHoverover=blue, nightBackground=black;
+color appColorForeground=red, appColorHoverover=blue, appColorBackground=green;
+color stopButtonHoverOver=blue;
 //
 Boolean colorDarkMode=false; //Preference: true or false //Future: Build Button for Dark Mode Preference
 //
@@ -65,7 +65,7 @@ void setup()
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
-   // Load Music
+  // Load Music
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
@@ -86,7 +86,6 @@ void setup()
   println(currentSong, file);
   song[currentSong+=1] = minim.loadFile( file );
   //
-  currentSong = 0;
   //
   song[currentSong].play();
   //Use play(timeStart) & loop(numberOfLoops)
@@ -99,25 +98,21 @@ void setup()
   //rect( X, Y, Width, Height );
   //rect( musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height );
   //
-  println(colorDarkMode);
   if ( colorDarkMode==false && ( hour()<=7 || hour()>=17 ) ) { //Testing: change 5PM to earlier time, shortcut colorNightMode==true
     //Night
     appColorForeground = nightForeground;
     appColorHoverover = nightHoverover;
     appColorBackground = nightBackground;
-    println("here1");
   } else if ( colorDarkMode==false && ( hour()>7 || hour()<17 ) ) {
     //Day
     appColorForeground = dayForeground;
     appColorHoverover = dayHoverover;
     appColorBackground = dayBackground;
-    println("here2");
   } else {
-    //Dark Mode
+    //Dark Mode 
     appColorForeground = darkForeground;
     appColorHoverover = darkHoverover;
     appColorBackground = darkBackground;
-    println("here3");
   }
   //
 } //End setup

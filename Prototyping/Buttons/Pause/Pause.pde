@@ -7,7 +7,7 @@ import ddf.minim.ugens.*;
 //
 //Global Variables
 Minim minim;
-int numberOfSongs = 8; //Able to Autodetect based on Pathway
+int numberOfSongs = 3; //Able to Autodetect based on Pathway
 AudioPlayer[] song = new AudioPlayer[numberOfSongs];
 int currentSong = numberOfSongs - numberOfSongs;  //beginning current song as ZERO
 //
@@ -17,12 +17,12 @@ float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_H
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
 //
-color purple=#DB05FF, yellow=#E9FF00, blue=#037EFF, white=#FFFFFF, black=#000000, green=#00FF00;
-color dayForeground=purple, dayHoverover=blue, dayBackground=white;
-color darkForeground=purple, darkHoverover=yellow, darkBackground=black;
-color nightForeground=green, nightHoverover=yellow, nightBackground=black;
-color appColorForeground, appColorHoverover, appColorBackground;
-color stopButtonHoverOver;
+color black=#1C1C1C, red=#FF5733, yellow=#FFC300, blue=#3498DB, green=#2ECC71;
+color dayForeground=green, dayHoverover=red, dayBackground=yellow;
+color darkForeground=black, darkHoverover=green, darkBackground=red;
+color nightForeground=yellow, nightHoverover=blue, nightBackground=black;
+color appColorForeground=red, appColorHoverover=blue, appColorBackground=green;
+color stopButtonHoverOver=blue;
 //
 Boolean colorDarkMode=true; //Preference: true or false //Future: Build Button for Dark Mode Preference
 //
@@ -69,37 +69,24 @@ void setup()
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
-  String beatYourCompetition = "Beat_Your_Competition";
-  String cycles = "Cycles";
+  String mangos = "mangos";
   String eureka = "Eureka";
-  String ghostWalk = "Ghost_Walk";
-  String groove = "groove";
-  String newsroom = "Newsroom";
-  String startYourEngines = "Start_Your_Engines";
-  String theSimplest = "The_Simplest";
+  String cycles = "Cycles";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
-  String file = directory + groove + mp3FileName;
+  String file;
+  file = directory + mangos + mp3FileName;
+  println(currentSong, file);
   song[currentSong] = minim.loadFile( file );
-  file = directory + startYourEngines + mp3FileName;
-  song[currentSong+=1] = minim.loadFile( file );
-  file = directory + beatYourCompetition + mp3FileName;
+  file = directory + eureka + mp3FileName;
+  println(currentSong, file);
   song[currentSong+=1] = minim.loadFile( file );
   file = directory + cycles + mp3FileName;
-  song[currentSong+=1] = minim.loadFile( file );
-  file = directory + eureka + mp3FileName;
-  song[currentSong+=1] = minim.loadFile( file );
-  file = directory + ghostWalk + mp3FileName;
-  song[currentSong+=1] = minim.loadFile( file );
-  file = directory + newsroom + mp3FileName;
-  song[currentSong+=1] = minim.loadFile( file );
-  file = directory + theSimplest + mp3FileName;
+  println(currentSong, file);
   song[currentSong+=1] = minim.loadFile( file );
   //
-  currentSong = 0;
-  //
-  song[currentSong].play();
+  //song[currentSong].play();
   //Use play(timeStart) & loop(numberOfLoops)
   //Purpose is 2D Shapes
   //Introduce keyPressed as keyboard shortcuts

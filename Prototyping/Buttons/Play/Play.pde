@@ -18,14 +18,12 @@ float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButto
 float stopX, stopY, stopWidth, stopHeight;
 float playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y;
 //
-color purple=#8A2BE2, yellow=#FFD700, blue=#1E90FF, white=#F5FFFA, black=#191919, green=#32CD32;
-color dayForeground=yellow, dayHoverover=purple, dayBackground=blue;
-color darkForeground=blue, darkHoverover=green, darkBackground=black;
-color nightForeground=purple, nightHoverover=white, nightBackground=black;
-color appColorForeground=green, appColorHoverover=yellow, appColorBackground=blue;
-color ButtonHoverOver=white, quitButtonLineColour=yellow;
-//
-color stopButtonHoverOver;
+color black=#1C1C1C, red=#FF5733, yellow=#FFC300, blue=#3498DB, green=#2ECC71;
+color dayForeground=green, dayHoverover=red, dayBackground=yellow;
+color darkForeground=black, darkHoverover=green, darkBackground=red;
+color nightForeground=yellow, nightHoverover=blue, nightBackground=black;
+color appColorForeground=red, appColorHoverover=blue, appColorBackground=green;
+color stopButtonHoverOver=blue;
 //
 Boolean colorDarkMode=true; //Preference: true or false //Future: Build Button for Dark Mode Preference
 //
@@ -95,7 +93,6 @@ void setup()
   file = directory + cycles + mp3FileName;
   println(currentSong, file);
   song[currentSong+=1] = minim.loadFile( file );
-  //
   //
   //song[currentSong].play();
   //Use play(timeStart) & loop(numberOfLoops)
