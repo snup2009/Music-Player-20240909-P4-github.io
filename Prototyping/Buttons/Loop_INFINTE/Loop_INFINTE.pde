@@ -7,7 +7,7 @@ import ddf.minim.ugens.*;
 //
 //Global Variables
 Minim minim;
-int numberOfSongs = 3; //Able to Autodetect based on Pathway
+int numberOfSongs = 8; //Able to Autodetect based on Pathway
 AudioPlayer[] song = new AudioPlayer[numberOfSongs];
 int currentSong = numberOfSongs - numberOfSongs;  //beginning current song as ZERO
 //
@@ -17,12 +17,12 @@ float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_H
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
 //
-color black=#1C1C1C, red=#FF5733, yellow=#FFC300, blue=#3498DB, green=#2ECC71;
-color dayForeground=green, dayHoverover=red, dayBackground=yellow;
-color darkForeground=black, darkHoverover=green, darkBackground=red;
-color nightForeground=yellow, nightHoverover=blue, nightBackground=black;
-color appColorForeground=red, appColorHoverover=blue, appColorBackground=green;
-color stopButtonHoverOver=blue;
+color purple=#8A2BE2, yellow=#FFD700, blue=#1E90FF, white=#F5FFFA, black=#191919, green=#32CD32;
+color dayForeground=yellow, dayHoverover=purple, dayBackground=blue;
+color darkForeground=blue, darkHoverover=green, darkBackground=black;
+color nightForeground=purple, nightHoverover=white, nightBackground=black;
+color appColorForeground=green, appColorHoverover=yellow, appColorBackground=blue;
+color stopButtonHoverOver=white, quitButtonLineColour=yellow;
 //
 Boolean colorDarkMode=false; //Preference: true or false //Future: Build Button for Dark Mode Preference
 //
@@ -65,7 +65,7 @@ void setup()
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
-  // Load Music
+   // Load Music
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
@@ -85,6 +85,8 @@ void setup()
   file = directory + cycles + mp3FileName;
   println(currentSong, file);
   song[currentSong+=1] = minim.loadFile( file );
+  //
+  currentSong = 0;
   //
   song[currentSong].play();
   //Use play(timeStart) & loop(numberOfLoops)
@@ -159,11 +161,7 @@ void mousePressed() {
    Must have Hoverover to ensure mouse will activate, visual confirmation of algorithm
    */
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
-    if ( song[currentSong].isPlaying() ) {
-      song[currentSong].pause(); //single tap
-    } else {
-      song[currentSong].rewind(); //double tap
-    }
+    //What key board should cut do you want here?
   }
   //
 } //End mousePressed
