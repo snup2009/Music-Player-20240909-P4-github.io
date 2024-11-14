@@ -15,7 +15,7 @@ int appWidth, appHeight;
 float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height;
 float musicButtonSquareX=0.0, musicButtonSquareY=0.0, musicButtonSquareWidth=0.0, musicButtonSquareHeight=0.0; //Populated in IF
 //
-void setup()
+void setup() 
 {
   size(1000, 800);
   appWidth = width;
