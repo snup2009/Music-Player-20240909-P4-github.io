@@ -1,20 +1,19 @@
-int appWidth, appHeight;
-float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
-PImage picBackground;
-//
-size( 500, 100 ); //Landscape
-appWidth = width;
-appHeight = height;
-//
-//Population
-backgroundImageX = appWidth*0;
-backgroundImageY = appHeight*0;
-backgroundImageWidth = appWidth-1;
-backgroundImageHeight = appHeight-1;
-picBackground = loadImage("Kylian.jpg");
-//
-//DIVs
-rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
-//
-//Draw Image One Time, for testing
-image( picBackground, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+PImage img1, img2;
+
+void setup() {
+  // Load both images
+  img1 = loadImage("Kylian.jpg");  // Replace with your first image path
+  img2 = loadImage("Cat03.jpg");  // Replace with your second image path
+  
+  size(800, 600);  // Set canvas size
+}
+
+void draw() {
+  background(255);  // Clear the background with a white color
+  
+  // Draw the first image
+  image(img1, 0, 0);
+  
+  // Draw the second image on top of the first image
+  image(img2, 100, 100);  // Adjust the position as needed
+}
